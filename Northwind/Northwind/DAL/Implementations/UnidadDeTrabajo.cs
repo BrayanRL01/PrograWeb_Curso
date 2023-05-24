@@ -1,4 +1,5 @@
 ﻿using DAL.Interfaces;
+using DAL.Implementations;
 using Entities.Entities;
 using System;
 using System.Collections.Generic;
@@ -46,4 +47,4 @@ namespace DAL.Implementations
     }
 }
     
-    }
+   

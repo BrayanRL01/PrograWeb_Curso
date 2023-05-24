@@ -1,5 +1,6 @@
 ﻿using DAL.Interfaces;
 using Entities.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,47 +19,124 @@ namespace DAL.Implementations
         }
         public bool Add(TEntity entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                Context.Set<TEntity>().Add(entity);
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
         }
 
         public void AddRange(IEnumerable<TEntity> entities)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Context.Set<TEntity>().AddRange(entities);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return Context.Set<TEntity>().Where(predicate);
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
         }
 
         public TEntity Get(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return Context.Set<TEntity>().Find(id);
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
         }
 
         public IEnumerable<TEntity> GetAll()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return Context.Set<TEntity>().ToList();
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
         }
 
         public bool Remove(TEntity entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Context.Set<TEntity>().Attach(entity);
+                Context.Set<TEntity>().Remove(entity);
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
         }
 
         public void RemoveRange(IEnumerable<TEntity> entities)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Context.Set<TEntity>().RemoveRange(entities);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return Context.Set<TEntity>().SingleOrDefault(predicate);
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
         }
 
         public bool Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Context.Entry(entity).State = EntityState.Modified;
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
         }
     }
 }
