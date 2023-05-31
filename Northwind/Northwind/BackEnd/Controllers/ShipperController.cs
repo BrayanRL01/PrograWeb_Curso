@@ -1,4 +1,5 @@
 ﻿using DAL.Implementations;
+using BackEnd.Models;
 using DAL.Interfaces;
 using Entities.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,27 @@ namespace BackEnd.Controllers
     {
         private IShipperDAL shipperDAL;
 
+        private ShipperModel Convertir(Shipper shipper)
+        {
+            return new ShipperModel
+            {
+                ShipperId = shipper.ShipperId,
+                CompanyName = shipper.CompanyName,
+                Phone = shipper.Phone
+            };
+        }
+
+
+        private Shipper Convertir(ShipperModel shipper)
+        {
+            return new Shipper
+            {
+                ShipperId = shipper.ShipperId,
+                CompanyName = shipper.CompanyName,
+                Phone = shipper.Phone
+            };
+        }
+
         public ShipperController()
         {
             shipperDAL = new ShipperDALImpl();
@@ -24,7 +46,13 @@ namespace BackEnd.Controllers
         public JsonResult Get()
         {
             IEnumerable<Shipper> shippers = shipperDAL.GetAll();
-            return new JsonResult(shippers);
+            List<ShipperModel> models = new List<ShipperModel>();
+
+            foreach (var shipper in shippers)
+            {
+                models.Add(Convertir(shipper));
+            }
+            return new JsonResult(models);
         }
 
         // GET api/<ShipperController>/5
@@ -32,7 +60,7 @@ namespace BackEnd.Controllers
         public JsonResult Get(int id)
         {
             Shipper shipper = shipperDAL.Get(id);
-            return new JsonResult(shipper);
+            return new JsonResult(Convertir(shipper));
         }
 
         #endregion
