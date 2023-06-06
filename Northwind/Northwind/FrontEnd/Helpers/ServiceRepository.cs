@@ -7,7 +7,7 @@
         public ServiceRepository()
         {
             Client = new HttpClient();
-            Client.BaseAddress = new Uri("http://localhost:5135");
+            Client.BaseAddress = new Uri("http://localhost:5135/");
 
         }
         public HttpResponseMessage GetResponse(string url)
