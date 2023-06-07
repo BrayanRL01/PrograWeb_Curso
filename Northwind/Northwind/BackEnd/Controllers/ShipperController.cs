@@ -68,8 +68,10 @@ namespace BackEnd.Controllers
         #region Agregar
         // POST api/<ShipperController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public JsonResult Post([FromBody] ShipperModel shipper)
         {
+            shipperDAL.Add(Convertir(shipper));
+            return new JsonResult(shipper);
         }
 
         #endregion
@@ -91,6 +93,11 @@ namespace BackEnd.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            Shipper shipper = new Shipper
+            {
+                ShipperId = id
+            };
+            shipperDAL.Remove(shipper);
         }
 
         #endregion

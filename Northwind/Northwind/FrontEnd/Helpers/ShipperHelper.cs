@@ -48,11 +48,36 @@ namespace FrontEnd.Helpers
         {
             HttpResponseMessage responseMessage = repository.PutResponse("api/shipper/", shipper);
             var content = responseMessage.Content.ReadAsStringAsync().Result;
-            ShipperViewModel categoryAPI = JsonConvert.DeserializeObject<ShipperViewModel>(content);
-            return categoryAPI;
+            ShipperViewModel shipperAPI = JsonConvert.DeserializeObject<ShipperViewModel>(content);
+            return shipperAPI;
         }
+        #endregion
 
+        #region Add
+        public ShipperViewModel Add(ShipperViewModel shipper)
+        {
+            HttpResponseMessage responseMessage = repository.PostResponse("api/shipper/", shipper);
+            var content = responseMessage.Content.ReadAsStringAsync().Result;
+            ShipperViewModel shipperAPI = JsonConvert.DeserializeObject<ShipperViewModel>(content);
+            return shipperAPI;
+        }
+        #endregion
 
+        #region Delete
+
+        /// <summary>
+        /// Obtener Categoria por ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ShipperViewModel Delete(int id)
+        {
+            ShipperViewModel shipper = new ShipperViewModel();
+            HttpResponseMessage responseMessage = repository.DeleteResponse("api/shipper/" + id);
+            // string content = responseMessage.Content.ReadAsStringAsync().Result;
+            // category = JsonConvert.DeserializeObject<CategoryViewModel>(content);
+            return shipper;
+        }
         #endregion
 
     }
