@@ -43,6 +43,18 @@ namespace FrontEnd.Helpers
         }
         #endregion
 
+        #region Update
+        public ShipperViewModel Edit(ShipperViewModel shipper)
+        {
+            HttpResponseMessage responseMessage = repository.PutResponse("api/shipper/", shipper);
+            var content = responseMessage.Content.ReadAsStringAsync().Result;
+            ShipperViewModel categoryAPI = JsonConvert.DeserializeObject<ShipperViewModel>(content);
+            return categoryAPI;
+        }
+
+
+        #endregion
+
     }
 }
 

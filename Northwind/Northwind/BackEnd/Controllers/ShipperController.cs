@@ -24,7 +24,6 @@ namespace BackEnd.Controllers
             };
         }
 
-
         private Shipper Convertir(ShipperModel shipper)
         {
             return new Shipper
@@ -40,6 +39,7 @@ namespace BackEnd.Controllers
             shipperDAL = new ShipperDALImpl();
 
         }
+
         #region Consultas
         // GET: api/<ShipperController>
         [HttpGet]
@@ -77,9 +77,11 @@ namespace BackEnd.Controllers
         #region Modificar
 
         // PUT api/<ShipperController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public JsonResult Put([FromBody] ShipperModel shipper)
         {
+            shipperDAL.Update(Convertir(shipper));
+            return new JsonResult(shipper);
         }
 
         #endregion

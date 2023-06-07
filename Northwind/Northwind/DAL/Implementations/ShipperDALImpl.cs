@@ -66,7 +66,19 @@ namespace DAL.Implementations
 
         public bool Update(Shipper entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (unidad = new UnidadDeTrabajo<Shipper>(new NorthwindContext()))
+                {
+                    unidad.genericDAL.Update(entity);
+                    unidad.Complete();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }
