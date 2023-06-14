@@ -1,5 +1,6 @@
 ﻿using DAL.Interfaces;
 using Entities.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,6 @@ namespace DAL.Implementations
     {
         private NorthwindContext northWindContext;
         private UnidadDeTrabajo<Shipper> unidad;
-
-        NorthwindContext northwindContext = new NorthwindContext();
 
         public bool Add(Shipper entity)
         {
@@ -55,10 +54,23 @@ namespace DAL.Implementations
 
         public async Task<IEnumerable<Shipper>> GetAll()
         {
-            IEnumerable<Shipper> shippers = null;
-            using (unidad = new UnidadDeTrabajo<Shipper>(new NorthwindContext()))
+            List<Shipper> shippers = new List<Shipper>();
+            List<SP_GetAllShippers_Result> resultado;
+
+            string Query = "[dbo].[SP_GetAllShippers]";
+            NorthwindContext northwindContext = new NorthwindContext();
+            resultado = await northwindContext.SP_GetAllShippers_Results
+                        .FromSqlRaw(Query)
+                        .ToListAsync();
+            foreach (var item in resultado)
             {
-                shippers = await unidad.genericDAL.GetAll();
+                shippers.Add(
+                    new Shipper
+                    {
+                        ShipperId = item.ShipperId,
+                        CompanyName = item.CompanyName,
+                        Phone = item.Phone
+                    });
             }
             return shippers;
         }
@@ -69,7 +81,6 @@ namespace DAL.Implementations
             {
                 using (unidad = new UnidadDeTrabajo<Shipper>(new NorthwindContext()))
                 {
-                    unidad.genericDAL.Remove(entity);
                     unidad.Complete();
                 }
                 return true;
