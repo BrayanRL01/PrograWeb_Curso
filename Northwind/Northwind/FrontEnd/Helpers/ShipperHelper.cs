@@ -12,6 +12,7 @@ namespace FrontEnd.Helpers
             repository = new ServiceRepository();
         }
 
+        #region GetAll
         public List<ShipperViewModel> GetAll()
         {
             List<ShipperViewModel> lista = new List<ShipperViewModel>();
@@ -24,6 +25,7 @@ namespace FrontEnd.Helpers
             }
             return lista;
         }
+        #endregion
 
         #region GetByID
         /// <summary>

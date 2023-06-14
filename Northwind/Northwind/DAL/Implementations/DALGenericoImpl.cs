@@ -21,7 +21,6 @@ namespace DAL.Implementations
         {
             try
             {
-
                 Context.Set<TEntity>().Add(entity);
                 return true;
             }

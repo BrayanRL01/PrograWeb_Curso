@@ -98,6 +98,7 @@ namespace DAL.Implementations
             {
                 using (unidad = new UnidadDeTrabajo<Shipper>(new NorthwindContext()))
                 {
+                    unidad.genericDAL.Remove(entity);
                     unidad.Complete();
                 }
                 return true;
