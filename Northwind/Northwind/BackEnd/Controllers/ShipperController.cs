@@ -13,7 +13,6 @@ namespace BackEnd.Controllers
     public class ShipperController : ControllerBase
     {
         private IShipperDAL shipperDAL;
-
         private ShipperModel Convertir(Shipper shipper)
         {
             return new ShipperModel
@@ -99,7 +98,6 @@ namespace BackEnd.Controllers
             };
             shipperDAL.Remove(shipper);
         }
-
         #endregion
     }
 }
