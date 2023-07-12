@@ -19,7 +19,8 @@ namespace BackEnd.Controllers
             {
                 ShipperId = shipper.ShipperId,
                 CompanyName = shipper.CompanyName,
-                Phone = shipper.Phone
+                Phone = shipper.Phone,
+                Picture = shipper.Picture
             };
         }
 
@@ -29,7 +30,8 @@ namespace BackEnd.Controllers
             {
                 ShipperId = shipper.ShipperId,
                 CompanyName = shipper.CompanyName,
-                Phone = shipper.Phone
+                Phone = shipper.Phone,
+                Picture = shipper.Picture
             };
         }
 

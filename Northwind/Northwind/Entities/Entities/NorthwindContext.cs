@@ -43,7 +43,6 @@ namespace Entities.Entities
         public virtual DbSet<SummaryOfSalesByYear> SummaryOfSalesByYears { get; set; } = null!;
         public virtual DbSet<Supplier> Suppliers { get; set; } = null!;
         public virtual DbSet<Territory> Territories { get; set; } = null!;
-        public virtual DbSet<SP_GetAllShippers_Result> SP_GetAllShippers_Results { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -648,6 +647,8 @@ namespace Entities.Entities
                 entity.Property(e => e.CompanyName).HasMaxLength(40);
 
                 entity.Property(e => e.Phone).HasMaxLength(24);
+
+                entity.Property(e => e.Picture).HasColumnType("image");
             });
 
             modelBuilder.Entity<SummaryOfSalesByQuarter>(entity =>
