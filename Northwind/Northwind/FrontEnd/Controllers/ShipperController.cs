@@ -55,7 +55,7 @@ namespace FrontEnd.Controllers
         {
             shipperHelper = new ShipperHelper();
             ShipperViewModel shipper = shipperHelper.GetByID(id);
-            return View(shipper);   
+            return View(shipper);
         }
 
         // POST: ShipperController/Edit/5
@@ -98,6 +98,35 @@ namespace FrontEnd.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult UploadImage(int id)
+        {
+            shipperHelper = new ShipperHelper();
+            ShipperViewModel shipper = shipperHelper.GetByID(id);
+            return View(shipper);
+        }
+
+        [HttpPost]
+        public ActionResult UploadImage(ShipperViewModel shipper, List<IFormFile> files)
+        {
+            if (files.Count > 0)
+            {
+                IFormFile formFile = files[0];
+
+                using (var ms = new MemoryStream())
+                {
+                    formFile.CopyTo(ms);
+                    shipper.Picture = ms.ToArray();
+                }
+            }
+
+            shipperHelper = new ShipperHelper();
+            ShipperViewModel ship = shipperHelper.GetByID(shipper.ShipperId);
+            ship.Picture = shipper.Picture;
+            shipperHelper.Edit(ship);
+
+            return RedirectToAction("Details", new { id = ship.ShipperId });
         }
     }
 }

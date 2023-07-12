@@ -1,0 +1,13 @@
+﻿@model FrontEnd.Models.ShipperViewModel
+
+@{
+    if (Model.Picture != null)
+    {
+        string imageBase64 = Convert.ToBase64String(Model.Picture);
+        string imageSrc = string.Format("data:ContentType = image/jpg;base64,{0}", imageBase64);
+
+        <img src="@imageSrc" width="500" height="500" />
+
+    }
+
+}

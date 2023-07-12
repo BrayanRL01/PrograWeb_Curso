@@ -28,9 +28,11 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Phone)
         </dd>
+        <partial name="_ShipperImage" model="Model" />
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ShipperId }) |
+    @Html.ActionLink("UploadImage", "UploadImage", new { id = Model.ShipperId }) |
     <a asp-action="Index">Back to List</a>
 </div>

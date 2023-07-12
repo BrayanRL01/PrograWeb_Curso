@@ -1,0 +1,35 @@
+﻿@model FrontEnd.Models.ShipperViewModel
+
+@{
+    ViewData["Title"] = "UploadImage";
+}
+
+<h1>Upload Picture</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="UploadImage" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.HiddenFor(Model => Model.ShipperId)
+            <div class="form-group">
+                <input type="file" asp-for="Picture" class="form-control" name="files" />
+                <span asp-validation-for="Picture" class="text-danger"></span>
+            </div>
+            <partial name="_ShipperImage" model="Model" />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
