@@ -12,16 +12,12 @@ namespace DAL.Implementations
     public class UnidadDeTrabajo<T> : IDisposable where T : class
     {
         private readonly NorthwindContext context;
-        //public IDALGenerico<Queja> quejaDAL;
-        //public IDALGenerico<TablaGeneral> tablaDAL;
         public IDALGenerico<T> genericDAL;
-
 
         public UnidadDeTrabajo(NorthwindContext _context)
         {
             context = _context;
             genericDAL = new DALGenericoImpl<T>(context);
-
         }
 
         public bool Complete()
@@ -38,7 +34,6 @@ namespace DAL.Implementations
             }
 
         }
-
 
         public void Dispose()
         {

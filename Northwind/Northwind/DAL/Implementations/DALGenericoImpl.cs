@@ -24,9 +24,8 @@ namespace DAL.Implementations
                 Context.Set<TEntity>().Add(entity);
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
                 return false;
             }
         }
@@ -37,9 +36,8 @@ namespace DAL.Implementations
             {
                 Context.Set<TEntity>().AddRange(entities);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
                 throw;
             }
         }
@@ -50,9 +48,8 @@ namespace DAL.Implementations
             {
                 return Context.Set<TEntity>().Where(predicate);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
                 return null;
             }
         }
@@ -63,9 +60,8 @@ namespace DAL.Implementations
             {
                 return await Context.Set<TEntity>().FindAsync(id);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
                 return null;
             }
         }
@@ -76,9 +72,8 @@ namespace DAL.Implementations
             {
                 return await Context.Set<TEntity>().ToListAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
                 return null;
             }
         }
@@ -91,9 +86,8 @@ namespace DAL.Implementations
                 Context.Set<TEntity>().Remove(entity);
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
                 return false;
             }
         }
@@ -106,7 +100,6 @@ namespace DAL.Implementations
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -117,9 +110,8 @@ namespace DAL.Implementations
             {
                 return Context.Set<TEntity>().SingleOrDefault(predicate);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
                 return null;
             }
         }
@@ -131,9 +123,8 @@ namespace DAL.Implementations
                 Context.Entry(entity).State = EntityState.Modified;
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
                 return false;
             }
         }
